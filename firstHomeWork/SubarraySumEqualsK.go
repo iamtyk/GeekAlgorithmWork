@@ -5,6 +5,7 @@ func subarraySum(nums []int, k int) int {
 	  s1-n
 	  s[r]-s[l]=k
 	  s[l] = s[r]-k
+	  如果提前统计前缀和数量，k==0时，会导致包含本身这个 因为val-val=0,但这却不是一个前缀和
 	*/
 	countMap := map[int]int{}
 	countMap[0] = 1
