@@ -1,7 +1,7 @@
 package main
 
 import (
-	"GeekHomeWork/firstHomeWork"
+	"GeekAlgorithmWork/firstHomeWork"
 	"fmt"
 )
 
