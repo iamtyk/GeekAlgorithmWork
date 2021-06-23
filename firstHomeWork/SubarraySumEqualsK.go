@@ -20,3 +20,26 @@ func subarraySum(nums []int, k int) int {
 
 	return ans
 }
+
+//不能直接使用优美子的查找
+func numberOfSubarrays(nums []int, k int) int {
+	count := map[int]int{}
+	s := make([]int, len(nums)+1)
+	//计算前缀和
+	for i, val := range nums {
+		s[i+1] = s[i] + val
+	}
+	//计数
+	for _, val := range s {
+		count[val]++
+	}
+	//查找
+	ans := 0
+	for i := 1; i < len(s); i++ {
+		val := s[i]
+		//这里就导致无序了，不能保证val>=k,遍历的一定是做左边，因为可能为负数、0
+		ans += count[val-k]
+	}
+
+	return ans
+}
