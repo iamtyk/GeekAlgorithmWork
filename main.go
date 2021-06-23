@@ -1,9 +1,11 @@
 package main
 
 import (
+	"GeekAlgorithmWork/Global"
 	"GeekAlgorithmWork/byteDanceFaceTry"
 	"GeekAlgorithmWork/firstHomeWork"
 	"fmt"
+	"sort"
 	"strconv"
 )
 
@@ -19,5 +21,28 @@ func main() {
 	inputSlice = []int{3, 1, 2}
 	byteDanceFaceTry.Merge_sort(inputSlice, make([]int, len(inputSlice)), 0, len(inputSlice))
 	fmt.Println(inputSlice)
+	fmt.Println(strconv.Atoi("1"))
+	fmt.Println(twoSum(inputSlice, 5))
+}
 
+func twoSum(nums []int, target int) []int {
+	pair := [][]int{} //go没有tuple用数组代替
+	for i, val := range nums {
+		pair = append(pair, []int{val, i})
+	}
+	sort.Slice(pair, func(i, j int) bool {
+		return pair[i][0] < pair[j][0]
+	})
+	l, r := 0, len(nums)-1
+	for l < r {
+		sumVal := pair[l][0] + pair[r][0]
+		if sumVal == target {
+			return []int{Global.Min(pair[l][1], pair[r][1]), Global.Max(pair[l][1], pair[r][1])}
+		} else if sumVal > target {
+			r--
+		} else {
+			l++
+		}
+	}
+	return nil
 }
