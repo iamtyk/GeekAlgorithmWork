@@ -3,6 +3,7 @@ package byteDanceFaceTry
 import (
 	"GeekAlgorithmWork/Global"
 	"math"
+	"strconv"
 )
 
 func Quick_sort(nums []int, l, r int) {
@@ -105,4 +106,47 @@ func corpFlightBookings(bookings [][]int, n int) []int {
 		sum[i] = sum[i-1] + delta[i]
 	}
 	return sum[1:]
+}
+
+func bigDataAdd(strA, strB string) (result string) {
+	lenA := len(strA)
+	lenB := len(strB)
+	lenBase := 0
+	if lenA > lenB {
+		lenBase = lenA
+	} else {
+		lenBase = lenB
+	}
+	j := 0 //进位数
+	result = ""
+	inxA := lenA - 1
+	inxB := lenB - 1
+	itemA := 0
+	itemB := 0
+	for inxBase := lenBase - 1; inxBase >= 0; inxBase-- {
+		itemA = 0
+		if inxA >= 0 {
+			itemA, _ = strconv.Atoi(string(strA[inxA]))
+			inxA--
+		}
+		itemB = 0
+		if inxB >= 0 {
+			itemB, _ = strconv.Atoi(string(strB[inxB]))
+			inxB--
+		}
+		sum := itemA + itemB + j
+		if sum > 9 {
+			j = 1
+			sum = sum - 10
+		} else {
+			j = 0
+		}
+		result = strconv.Itoa(sum) + result
+	}
+
+	if j > 0 {
+		result = strconv.Itoa(j) + result
+	}
+
+	return
 }
