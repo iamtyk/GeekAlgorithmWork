@@ -4,6 +4,8 @@ import "container/list"
 
 //用list包做，但是耗时特别长，应该是value.([]int)的时候出问题了
 //试了一下，也没快多少
+//我在leetcode断点调试时，取字典的时候就很慢，可能和list包实现的双向链表是一个环有关，头和尾是相连的
+//如果自己实现头尾断开的双向链表就只要120ms，用list包就要700ms
 type LRUCache struct {
 	cacheList *list.List            //list包中，头前结点是尾指针，
 	refectMap map[int]*list.Element //[]int{key, value}
