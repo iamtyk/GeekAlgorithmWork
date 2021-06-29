@@ -6,6 +6,11 @@ import (
 	"strconv"
 )
 
+import (
+	"math/rand"
+	"time"
+)
+
 func Quick_sort(nums []int, l, r int) {
 	if l+1 >= r {
 		return
@@ -52,6 +57,47 @@ func Merge_sort(nums, temp []int, l, r int) {
 		nums[i] = temp[i]
 	}
 
+}
+
+func findKthLargest(nums []int, k int) int {
+	rand.Seed(time.Now().UnixNano())
+	target := len(nums) - k
+	l, r := 0, len(nums)-1
+	for l < r {
+		index := quick_sortIndex(nums, l, r)
+		if index == target {
+			return nums[index]
+		}
+		if target > index {
+			l = index + 1
+		} else {
+			r = index - 1
+		}
+	}
+	return nums[l]
+}
+func quick_sortIndex(nums []int, l, r int) int {
+	//randNums(nums, l, r)
+	i, j := l+1, r
+	for {
+		for i < r && nums[i] <= nums[l] {
+			i++
+		}
+		for j > l && nums[j] >= nums[l] {
+			j--
+		}
+		if i >= j {
+			break
+		}
+
+		nums[i], nums[j] = nums[j], nums[i]
+	}
+	nums[l], nums[j] = nums[j], nums[l]
+	return j
+}
+func randNums(nums []int, l, r int) {
+	i := rand.Int() % (r - l + 1)
+	nums[i], nums[r] = nums[r], nums[i]
 }
 
 //最大子序和
