@@ -3,10 +3,19 @@ package main
 import (
 	"GeekAlgorithmWork/Global"
 	"GeekAlgorithmWork/byteDanceFaceTry"
+	"fmt"
 	"sort"
 )
 
 func main() {
+	testMap := map[int]bool{}
+	fmt.Println(testMap[1])
+	testArrStr := "abc"
+	strSin := testArrStr[0]
+	fmt.Println(strSin)
+	q := []int{0}
+	q = q[1:len(q)]
+
 	channel := make(chan int)
 	flagChan := make(chan bool)
 	flagChan <- true
