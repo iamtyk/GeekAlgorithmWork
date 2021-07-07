@@ -3,33 +3,33 @@ package week3
 func solve(board [][]byte) {
 	dx := []int{1, 0, -1, 0}
 	dy := []int{0, 1, 0, -1}
-	visist := make([][]bool, len(board))
-	for i := range visist {
-		visist[i] = make([]bool, len(board[0]))
+	var visits = make([][]bool, len(board))
+	for i := range visits {
+		visits[i] = make([]bool, len(board[0]))
 	}
 	m, n := len(board), len(board[0])
 	//bfs
-	q := [][]int{}
-	ans := [][][]int{}
+	var q [][]int
+	var ans [][][]int
 	for row, arr := range board {
 		for col, ch := range arr {
-			if visist[row][col] {
+			if visits[row][col] {
 				continue
 			}
-			visist[row][col] = true
+			visits[row][col] = true
 			if ch == 'X' {
 				continue
 			}
 			q = append(q, []int{row, col})
-			inserO := [][]int{{0}} //标记插入的O是否临近边缘，0表示没有
+			insertO := [][]int{{0}} //标记插入的O是否临近边缘，0表示没有
 			for len(q) > 0 {
 				p := q[0]
 
 				x, y := p[0], p[1]
-				inserO = append(inserO, []int{x, y})
+				insertO = append(insertO, []int{x, y})
 				if x == 0 || x == m-1 || y == 0 || y == n-1 {
 					//是边缘，置标记
-					inserO[0][0] = 1
+					insertO[0][0] = 1
 				}
 				q = q[1:]
 				for i := 0; i < 4; i++ {
@@ -39,20 +39,20 @@ func solve(board [][]byte) {
 						continue
 					}
 
-					if visist[nx][ny] {
+					if visits[nx][ny] {
 						continue
 					}
 
-					visist[nx][ny] = true
+					visits[nx][ny] = true
 					if board[nx][ny] == 'X' {
 						continue
 					}
 					q = append(q, []int{nx, ny})
 				}
 			}
-			//fmt.Println(inserO)
+			//fmt.Println(insertO)
 			//找完一个团子，加入结果
-			ans = append(ans, inserO)
+			ans = append(ans, insertO)
 		}
 	} //bfs结束
 
