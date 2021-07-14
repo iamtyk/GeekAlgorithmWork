@@ -40,6 +40,13 @@ func main() {
 	twitter.PostTweet(2, 6)
 	fmt.Println(twitter.GetNewsFeed(1))
 
+	lc295Heap := week4.ConstructorLc295()
+	inputHeap := []int{-1, -2, -3, -4, -5}
+	for _, val := range inputHeap {
+		lc295Heap.AddNum(val)
+		fmt.Println(lc295Heap.FindMedian())
+	}
+
 	h := new(myHeap)
 	h.Push(1)
 	testMap := map[int]bool{}
