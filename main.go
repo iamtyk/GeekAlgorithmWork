@@ -3,6 +3,7 @@ package main
 import (
 	"GeekAlgorithmWork/Global"
 	"GeekAlgorithmWork/byteDanceFaceTry"
+	"GeekAlgorithmWork/week4"
 	"container/heap"
 	"fmt"
 	"sort"
@@ -32,6 +33,13 @@ func (h *myHeap) Push(v interface{}) {
 	*h = append(*h, v.([]int))
 }
 func main() {
+	twitter := week4.Constructor()
+	twitter.PostTweet(1, 5)
+	fmt.Println(twitter.GetNewsFeed(1))
+	twitter.Follow(1, 2)
+	twitter.PostTweet(2, 6)
+	fmt.Println(twitter.GetNewsFeed(1))
+
 	h := new(myHeap)
 	h.Push(1)
 	testMap := map[int]bool{}
@@ -40,7 +48,7 @@ func main() {
 	strSin := testArrStr[0]
 	fmt.Println(strSin)
 	q := []int{0}
-	q = q[1:len(q)]
+	q = q[1:]
 
 	channel := make(chan int)
 	flagChan := make(chan bool)
