@@ -11,8 +11,8 @@ func main() {
 	flagChan := make(chan bool)
 	flagChan <- true
 	go byteDanceFaceTry.Producer(channel)
-	go byteDanceFaceTry.Customer(channel, "cat:", flagChan)
-	go byteDanceFaceTry.Customer(channel, "dog:", flagChan)
+	go byteDanceFaceTry.PritNum1(flagChan, channel)
+	go byteDanceFaceTry.PritNum2(flagChan, channel)
 	for {
 
 	}

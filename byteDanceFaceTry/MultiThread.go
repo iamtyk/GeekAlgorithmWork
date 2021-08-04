@@ -29,5 +29,34 @@ func Customer(channel <-chan int, threadName string, flagChan chan bool) {
 		}
 		flagChan <- true
 	}
-
+}
+func PritNum1(selectTrun chan bool, content chan int) {
+	var flag bool
+	for {
+		select {
+		case flag = <-selectTrun:
+			if flag {
+				return
+			}
+			val := <-content
+			fmt.Println(val)
+			//do
+			selectTrun <- true
+		}
+	}
+}
+func PritNum2(selectTrun chan bool, content chan int) {
+	var flag bool
+	for {
+		select {
+		case flag = <-selectTrun:
+			if !flag {
+				return
+			}
+			val := <-content
+			fmt.Println(val)
+			//do
+			selectTrun <- false
+		}
+	}
 }
